@@ -10,6 +10,7 @@ function App() {
     <>
       <div>
         <h1>tanish</h1>
+        <h2>sunil</h2>
        </div>
     </>
   )
