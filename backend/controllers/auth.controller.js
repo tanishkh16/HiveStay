@@ -2,7 +2,7 @@
 //export function to sign up  of user
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../models/User'; 
+import User from '../models/User.js'; 
 
 export const signup = async (req, res, next) => {
   try {
