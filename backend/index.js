@@ -11,11 +11,17 @@ app.use(express.static('public'));
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use("/api",signup);
 app.use("/api",login)
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect('mongodb://localhost:27017/tanish', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://hivestay:hivestay@cluster0.rnut6pb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to MongoDB");
   })
