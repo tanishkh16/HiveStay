@@ -13,18 +13,18 @@ import User from '../models/User.js';
       return res.status(400).json({ error: 'Invalid email format. Only @iiitu.ac.in emails are allowed.' });
     }
 
-    if (!username || !password) {
+    if (!firstName || !password) {
       return res.status(400).json({ error: 'Username and password are required.' });
     }
 
     const hashPassword = await bcrypt.hashSync(password, 10);
     const hashedPassword = hashPassword.toString();
     
+    
     const newUser = new User({ firstName,lastName, email, password: hashedPassword,rollNumber,roomNumber,branch,mess,mobileNumber,homeMobileNumber,address });
-
     try {
       await newUser.save();
-      res.status(201).json("User created successfully");
+      res.status(201).json("user created successfully");
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
