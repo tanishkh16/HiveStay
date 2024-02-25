@@ -8,7 +8,6 @@ export default function Signup() {
   };
   return (
     <html>
-   
     <body class="bg-gray-200">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
