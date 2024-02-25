@@ -47,8 +47,6 @@ lastName:{
     type:String,
     required:true,
   },
-
-  
   
 });
 
