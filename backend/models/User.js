@@ -15,6 +15,7 @@ lastName:{
     required: true,
     unique:true,
   },
+  
   password: {
     type: String,
     required:true,
@@ -47,7 +48,7 @@ lastName:{
     type:String,
     required:true,
   },
-  
+
 });
 
 const User = mongoose.model("User", newSchema);
