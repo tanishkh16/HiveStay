@@ -8,19 +8,13 @@ import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [tweets, setTweets] = useState([]);
-  const [tweet, setTweet] = useState('');
+ 
 
   const handleChange = (e) => {
     setTweet(e.target.value);
   };
 
-  const handlePost = () => {
-    if (tweet.trim() !== '') {
-      setTweets([...tweets, tweet]);
-      setTweet('');
-    }
-  };
+ 
   const card=[
     {icon:"message", message:"Total Message",number:"$53k",percentage:"+55% than last week"},
     {icon:"person",message:"Total Users",number:"2,300",percentage:"+3% than last month"},
@@ -85,13 +79,7 @@ export default function Home() {
         </div>
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">Recent Tweets</h2>
-          <div>
-            {tweets.map((tweet, index) => (
-              <div key={index} className="bg-white rounded-md p-4 mb-2">
-                {tweet}
-              </div>
-            ))}
-          </div>
+          
         </div>
       </div>
     </div>

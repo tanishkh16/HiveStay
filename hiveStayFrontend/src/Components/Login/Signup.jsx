@@ -8,20 +8,7 @@ export default function Signup() {
   };
   return (
     <html>
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-      <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-      <title>Material Dashboard 2 by Creative Tim</title>
-      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-      <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-      <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-      <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-      <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-    </head>
+   
     <body class="bg-gray-200">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
@@ -69,8 +56,12 @@ export default function Signup() {
     </div>
     <div className="input-group input-group-outline my-3">
       <input type="number" placeholder="Mobile No. " className="form-control" />
-      <input type="number" placeholder="Last Name" className="form-control ml-2" style={{ marginLeft: '10px' }} />
+      <input type="number" placeholder="Parent's Mobile No." className="form-control ml-2" style={{ marginLeft: '10px' }} />
     </div>
+    <div className="input-group input-group-outline my-3">
+      <input type="text" placeholder="Address" className="form-control" />
+      </div>
+
                 
                   <div class="text-center">
                     <button type="button" class="bg-pink-600 h-10 rounded-lg hover:bg-pink-500 text-white w-100 my-4 mb-2">Sign Up</button>
