@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from 'js-cookie';
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/Auth/AuthSlice";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
 
   const backgroundImageStyle = {
@@ -25,10 +29,18 @@ const navigate = useNavigate();
           "Content-Type": "application/json",
         },
         });
-      console.log(res.data);
-      if(res.status===200){
+      console.log("token",res.data.token);
+      const token=res.data.token;
+      const decodedToken = jwtDecode(token);
+      const user = decodedToken;
+      
+      if (res.status === 200) {
+        Cookies.set('accessToken', token);
+
+        dispatch(setUser(res.data.rest));
         navigate("/");
       }
+      
   }catch(err){
     console.log(err);
     navigate("/login")
