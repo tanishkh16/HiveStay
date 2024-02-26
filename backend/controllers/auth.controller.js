@@ -13,7 +13,7 @@ import User from '../models/User.js';
       return res.status(400).json({ error: 'Invalid email format. Only @iiitu.ac.in emails are allowed.' });
     }
 
-    if (!username || !password) {
+    if (!firstName || !password) {
       return res.status(400).json({ error: 'Username and password are required.' });
     }
 
