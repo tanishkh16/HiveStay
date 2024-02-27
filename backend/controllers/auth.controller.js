@@ -20,11 +20,11 @@ import User from '../models/User.js';
     const hashPassword = await bcrypt.hashSync(password, 10);
     const hashedPassword = hashPassword.toString();
     
+    
     const newUser = new User({ firstName,lastName, email, password: hashedPassword,rollNumber,roomNumber,branch,mess,mobileNumber,homeMobileNumber,address });
-
     try {
       await newUser.save();
-      res.status(201).json("User created successfully");
+      res.status(201).json("user created successfully");
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -36,6 +36,7 @@ import User from '../models/User.js';
 
   export const login = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email,password);
   try {
     if (!email || !email.endsWith('@iiitu.ac.in')) {
       return res.status(400).json({ error: 'Invalid email format. Only @iiitu.ac.in emails are allowed.' });
@@ -54,7 +55,20 @@ import User from '../models/User.js';
     }
 
     const { password: pass, ...rest } = validUser._doc;
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_TOKEN);
+    const tokenData={
+      id: validUser._id,
+      firstName: validUser.firstName,
+      lastName: validUser.lastName,
+      email: validUser.email,
+      rollNumber: validUser.rollNumber,
+      roomNumber: validUser.roomNumber,
+      branch: validUser.branch,
+      mess: validUser.mess,
+      mobileNumber: validUser.mobileNumber,
+      homeMobileNumber: validUser.homeMobileNumber,
+      address: validUser.address
+    }
+    const token = jwt.sign(tokenData, process.env.JWT_TOKEN);
 
     const options = {
       httpOnly: true,
@@ -63,7 +77,7 @@ import User from '../models/User.js';
       sameSite: 'none'
     };
 
-    res.status(200).cookie('access_token', token, options).json(rest);
+    res.status(200).cookie('access_token', token, options).json({rest,token});
   } catch (error) {
     return next(error);
   }
@@ -106,7 +120,7 @@ import User from '../models/User.js';
 // }
 
 //simple function to delete the cookie
-export const signOutUser=async(req,res,next)=>{
+export const logout=async(req,res,next)=>{
 
   try {
        res.clearCookie('access_token');

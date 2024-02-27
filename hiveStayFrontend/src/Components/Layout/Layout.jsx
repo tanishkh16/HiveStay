@@ -2,12 +2,31 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdNotifications } from "react-icons/io";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
 export default function Layout({ title }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  const navigate = useNavigate();
+  const logout =async () => {
+    try{
+      const res=await axios.get("http://localhost:3000/api/logout",{
+        headers: {
+          "Content-Type": "application/json",
+      }
+      
+    })
+    Cookies.remove('accessToken')
+    navigate("/login")
+
+  }catch(err){
+    console.log(err);
+  }
+}
 
   return (
     <div className="g-sidenav-show bg-gray-200 ">
@@ -117,7 +136,7 @@ export default function Layout({ title }) {
                 </svg>
                 Notifications
               </Link>
-       <li><button className="align-center mt-8 ml-4 border hover:bg-pink-500 bg-pink-600 p-2 w-44 rounded-xl text-white">Logout </button></li> 
+       <li><button onClick={logout} className="align-center mt-8 ml-4 border hover:bg-pink-500 bg-pink-600 p-2 w-44 rounded-xl text-white">Logout </button></li> 
             </li>
           </ul>
         </nav>
