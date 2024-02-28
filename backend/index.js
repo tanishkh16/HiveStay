@@ -3,6 +3,11 @@ import mongoose, { get } from "mongoose";
 import dotenv from 'dotenv';
 import signup from "./routes/auth.router.js"
 import login from "./routes/auth.router.js"
+import addSuggestions from './routes/user.router.js'
+import addComplaints from './routes/user.router.js'
+import holidaysApplication from './routes/user.router.js'
+import user from './routes/user.router.js'
+import roomMaintance from "./routes/user.router.js"
 import logout from "./routes/auth.router.js"
 import post from "./routes/post.router.js"
 import getPosts from "./routes/post.router.js"
@@ -23,9 +28,16 @@ app.use((req, res, next) => {
 });
 app.use("/api",signup);
 app.use("/api",login)
+app.use("/api",user)
+app.use("/api",addSuggestions)
+app.use("/api",addComplaints)
+app.use('/api',holidaysApplication)
+app.use('/api',roomMaintance)
 app.use("/api",logout);
+
 app.use("/api",post);
 app.use("/api",getPosts);
+
 
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true }));
