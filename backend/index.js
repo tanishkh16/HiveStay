@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { get } from "mongoose";
 import dotenv from 'dotenv';
 import signup from "./routes/auth.router.js"
 import login from "./routes/auth.router.js"
@@ -9,6 +9,9 @@ import holidaysApplication from './routes/user.router.js'
 import user from './routes/user.router.js'
 import roomMaintance from "./routes/user.router.js"
 import logout from "./routes/auth.router.js"
+import post from "./routes/post.router.js"
+import getPosts from "./routes/post.router.js"
+
  dotenv.config();
 
 const app = express();
@@ -31,6 +34,10 @@ app.use("/api",addComplaints)
 app.use('/api',holidaysApplication)
 app.use('/api',roomMaintance)
 app.use("/api",logout);
+
+app.use("/api",post);
+app.use("/api",getPosts);
+
 
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true }));
