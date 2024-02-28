@@ -1,9 +1,12 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { get } from "mongoose";
 import dotenv from 'dotenv';
 import signup from "./routes/auth.router.js"
 import login from "./routes/auth.router.js"
 import logout from "./routes/auth.router.js"
+import post from "./routes/post.router.js"
+import getPosts from "./routes/post.router.js"
+
  dotenv.config();
 
 const app = express();
@@ -21,6 +24,9 @@ app.use((req, res, next) => {
 app.use("/api",signup);
 app.use("/api",login)
 app.use("/api",logout);
+app.use("/api",post);
+app.use("/api",getPosts);
+
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect('mongodb+srv://hivestay:hivestay@cluster0.rnut6pb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
