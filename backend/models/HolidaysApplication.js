@@ -6,16 +6,25 @@ const holidayApplicationSchema = new mongoose.Schema({
     email:{type: String,
         required: true
     },
-
+    hostelName:{type: String,
+     required: true 
+    },
     rollNumber: { type: String,
          required: true },
 
     roomNumber: { type: String,
         required: true },
 
-    noOfDays: { type: Number,
+    noOfHolidays: { type: String,
          required: true },
-
+     from:{
+          type: Date,
+         required: true
+     },
+     to :{
+          type: Date,
+          required: true   
+     },
     reason: { type: String,
          required: true },
 
@@ -25,8 +34,8 @@ const holidayApplicationSchema = new mongoose.Schema({
     homeMobileNumber: { type: String,
          required: true },
 
-    userId: { type: String,
-         required: true },
+    userId: { type: mongoose.Types.ObjectId,
+     default:'65dae93a4f4351eef185bb8e'},
           
     status: { type: String,
       default: 'Pending' },
@@ -37,3 +46,5 @@ const holidayApplicationSchema = new mongoose.Schema({
   const HolidaysApplication = mongoose.model("HolidaysApplication", holidayApplicationSchema);
 
   export default HolidaysApplication;
+
+
