@@ -11,7 +11,9 @@ import roomMaintance from "./routes/user.router.js"
 import logout from "./routes/auth.router.js"
 import post from "./routes/post.router.js"
 import getPosts from "./routes/post.router.js"
-
+import  holidaysApplicationStatus from "./routes/warden.router.js"
+import getHolidaysApplication from "./routes/warden.router.js"
+ 
  dotenv.config();
 
 const app = express();
@@ -35,9 +37,10 @@ app.use("/api",addComplaints)
 app.use('/api',holidaysApplication)
 app.use('/api',roomMaintance)
 app.use("/api",logout);
-
 app.use("/api",post);
 app.use("/api",getPosts);
+app.use("/api",holidaysApplicationStatus)
+app.use("/api",getHolidaysApplication)
 
 
 app.use(express.json()); // Parse JSON requests
