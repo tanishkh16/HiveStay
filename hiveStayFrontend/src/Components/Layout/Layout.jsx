@@ -156,9 +156,9 @@ export default function Layout({ title }) {
                 <IoMdNotifications className="h-8 mt-1 w-44 -mr-12 cursor-pointer" />{" "}
               </Link>
 
-              <Link  className='w-40' to="/profile">
+              <Link  className='w-20' to="/profile">
                 <img
-                  className="h-10 w-40 cursor-pointer"
+                  className="h-10 w-04 cursor-pointer"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlu7f9_MmSWQq06q_SUCRIx-0Cu0udlR-9hw&usqp=CAU"
                   alt="Notification Icon"
                 />

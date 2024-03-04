@@ -8,11 +8,10 @@ import RoomMaintaince from '../models/RoomMaintaince.js'
 //To find the user and its all details
 export const user= async(req,res,next)=>{
   try {
-    const _id = req.body;  // Assuming the user ID is in the request parameters
+    const _id = req.body;  
 
     try {
       const user = await User.findById(_id);  //
-      // Use await to execute the query
       console.log(user)
       if (!user) {
         return res.status(404).json("This user does not exist");
@@ -42,7 +41,10 @@ export const user= async(req,res,next)=>{
 // Complaints function 
 export const complaints=async(req,res,next)=>{
   try {
-    const complaint = new Complaint(req.body);
+    const { name,email,roll,mess,subject,complain,userId} = req.body;
+    console.log(userId)
+    const complaint = new Complaint({name,email,roll,mess,subject,complain,userId});
+    console.log(complaint);
     if(!complaint){
       return res.status(400).json({ error: 'Please Enter the complaints or Empty' });
     }

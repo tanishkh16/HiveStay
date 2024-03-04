@@ -6,4 +6,5 @@ router.post('/addSuggestions',suggestions)
 router.post('/addComplaints',complaints)
 router.post('/holidaysApplication',holidaysApplication)
 router.post('/roomMaintaince',roomMaintaince)
+
 export default router;

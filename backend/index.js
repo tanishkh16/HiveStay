@@ -17,7 +17,7 @@ import getPosts from "./routes/post.router.js"
 const app = express();
 const port = 3000;
 app.use(express.static('public'));
-app.use(express.json()); // Parse JSON requests
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+
 app.use("/api",signup);
 app.use("/api",login)
 app.use("/api",user)
