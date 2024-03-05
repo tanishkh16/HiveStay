@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LeaveCard from './LeaveCard';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 export default function Leave() {
   const user = useSelector(state => state.auth.user);
   console.log(user);
@@ -39,12 +40,15 @@ const handleSubmit = async (e) => {
 
     if (response.ok) {
       console.log('Data submitted successfully!');
+      toast.success("Your application has been submitted successfully");
       navigate('/');
     } else {
       console.error('Failed to submit data');
+      toast.error("Failed to submit your application ,Please try again")
     }
   } catch (error) {
     console.error('Error submitting data:', error);
+    toast.error("Please try again Later");
   }
   };
 

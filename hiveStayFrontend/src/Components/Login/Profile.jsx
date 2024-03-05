@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import toast from 'react-hot-toast';
 
 export default function Profile() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -24,9 +24,11 @@ export default function Profile() {
         
       })
       Cookies.remove('accessToken')
+      toast.success("Logged Out Successfully");
       navigate("/login")
   
     }catch(err){
+      toast.error("Logout Failed ,Please try Again");
       console.log(err);
     }
   }

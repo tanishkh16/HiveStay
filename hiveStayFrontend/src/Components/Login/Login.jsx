@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/Auth/AuthSlice";
 import { jwtDecode } from "jwt-decode";
-
+import toast ,{Toaster} from "react-hot-toast";
 export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -38,11 +38,16 @@ const navigate = useNavigate();
         Cookies.set('accessToken', token);
 
         dispatch(setUser(res.data.rest));
+        toast.success("Login Successfull!");
         navigate("/");
+      }else{
+        toast.error("Invalid Credentials");
       }
+      
       
   }catch(err){
     console.log(err);
+    toast.error("Plase Login again");
     navigate("/login")
   }
 }
