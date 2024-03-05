@@ -4,7 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import toast from "react-hot-toast";
 export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,13 +29,15 @@ export default function Signup() {
       });
       console.log(res.data)
       if(res.status===201){
+        toast.success("Account Created Successfully");
         navigate("/login");
+      }else{
+        toast.error("AccountCreation Failed");
       }
-
-
     }
     catch(err){
       console.log(err);
+      toast.error("Pleas try Again ");
       navigate("/signup")
 
     }

@@ -14,6 +14,7 @@ import Civil from './Components/Pages/Complains/Civil'
 import Notification from './Components/Pages/Notification/Notification'
 import Leave from './Components/Pages/Leave/Leave'
 import Profile from './Components/Login/Profile'
+import { Toaster } from 'react-hot-toast'
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" element={<Signup/>}/>
           <Route path='/profile' element={<Profile/>}/>
         </Routes>
+        <Toaster/>
         </BrowserRouter>
 
     </>
