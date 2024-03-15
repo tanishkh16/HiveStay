@@ -14,6 +14,7 @@ import Civil from './Components/Pages/Complains/Civil'
 import Notification from './Components/Pages/Notification/Notification'
 import Leave from './Components/Pages/Leave/Leave'
 import Profile from './Components/Login/Profile'
+import LeaveDescription from './Components/Pages/Leave/LeaveDescription'
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/" element={<Signup/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path="/:id" element={<LeaveDescription />} />
         </Routes>
         </BrowserRouter>
 

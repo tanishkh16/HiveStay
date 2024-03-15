@@ -12,6 +12,7 @@ export default function Mess() {
   const [mess, setMess] = useState("");
   const [subject, setSubject] = useState("");
   const [complain, setComplain] = useState("");
+  const [value,setValue]=useState([]);
 
   const backgroundImageStyle = {
     backgroundImage:
@@ -23,8 +24,7 @@ export default function Mess() {
     setEmail(user?.email);
     setRoll(user?.rollNumber);
     setMess(user?.mess)
-    console.log(user?.firstName,user?.email,user?.rollNumber,user?.mess,user?.id,complain,subject);
-    
+    console.log(user?.id)
   }, [name,email,roll,mess,subject,complain]);
  
   const handleSubmit = async (e) => {
@@ -46,15 +46,36 @@ export default function Mess() {
     console.log(err);
   }
 }
+
+const getComplaints=async()=>{
+  try{
+    const res=await axios.get("http://localhost:3000/api/getmessComplaints",{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    console.log(res.data)
+    setValue(res.data)
+  }
+catch(err){
+  console.log(err);
+}}
+
+useEffect(() => {
+  getComplaints();
+},[])
   return (
     <div>
         <Layout title="Mess Complains"/>
 
         {user?.email==="warden@iiitu.ac.in"?(
            <div className='ml-72'>
-            gfhj
+          {value.map((item)=>{
+
+          })}
             <div>
-              b
+              <h1>Mess Regardings Complains</h1>
+              
             </div>
             </div>
         ):(

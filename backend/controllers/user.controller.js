@@ -42,7 +42,8 @@ export const user= async(req,res,next)=>{
 export const complaints=async(req,res,next)=>{
   try {
     const { name,email,roll,mess,subject,complain,userId} = req.body;
-    console.log(userId)
+    console.log("userid",userId)
+    console.log("name",req.body)
     const complaint = new Complaint({name,email,roll,mess,subject,complain,userId});
     console.log(complaint);
     if(!complaint){
@@ -71,10 +72,13 @@ export const suggestions=async(req,res,next)=>{
 export  const holidaysApplication=async(req,res,next)=>{
   try {
     const holidayApplication = new HolidaysApplication(req.body);
-    await holidayApplication.save();
+    
+    const value=await holidayApplication.save();
+    console.log("value",value);
     res.status(201).send("Your application is sended successfully");
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
+    console.log(error);
   }
 
 }
@@ -97,3 +101,19 @@ export const roomMaintaince=async(req,res,next)=>{
     res.status(500).json({ error: error.message });
   }
 }
+
+export const holidayApplicationResponse = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const applications = await HolidaysApplication.find({ userId: userId });
+    if (!applications || applications.length === 0) {
+      return res.status(404).json({ error: 'No holiday applications found for this user' });
+    } else {
+      return res.status(200).json(applications);
+    }
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};

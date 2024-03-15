@@ -6,7 +6,7 @@ import LeaveCard from './LeaveCard';
 import axios from 'axios';
 export default function Leave() {
   const user = useSelector(state => state.auth.user);
-  console.log(user);
+  const [value,setValue]=useState([]);
   
 const[data,setData]=useState({
   name:user.firstName,
@@ -23,7 +23,6 @@ const[data,setData]=useState({
   userId:user.id
 });
 
-console.log(data);
 const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
@@ -36,7 +35,7 @@ const handleSubmit = async (e) => {
       },
       body: JSON.stringify(data),
     });
-
+console.log(response);
     if (response.ok) {
       console.log('Data submitted successfully!');
       navigate('/');
@@ -56,14 +55,21 @@ const handleSubmit = async (e) => {
             'Content-Type': 'application/json',
           },
         });
-       console.log(res.data);
+       setValue(res.data);
+       const filteredData=res.data.filter((item)=>{
+        if(item.status==="Pending"){
+          return item;
+        } 
+       });
+        setValue(filteredData);
+       
       } catch (error) {
        
       }
     };
   
     fetchData();
-  }, []);
+  }, [value]);
   
 
 
@@ -73,14 +79,31 @@ const handleSubmit = async (e) => {
       ...prevData,
       [name]: value,
     }));
-    console.log(data)
   };
   return (
     <div>
         <Layout title="Leave"/>
         {user.email==="warden@iiitu.ac.in"?(
           <div className='ml-96'>
-          <LeaveCard/>
+            {value.map((item)=>(
+                <LeaveCard
+                id={item._id}
+                name={item.name}
+                email={item.email}
+                hostelName={item.hostelName}
+                roomNumber={item.roomNumber}
+                rollNumber={item.rollNumber}
+                noOfHolidays={item.noOfHolidays}
+                reason={item.reason}
+                status={item.status}
+                mobileNumber={item.mobileNumber}
+                homeMobileNumber={item.homeMobileNumber}
+                from={item.from}
+                to={item.to}
+
+                />
+            ))}
+        
           </div>
         ):(
 <form onSubmit={handleSubmit} className="max-w-md mx-auto my-4 ">
@@ -134,6 +157,7 @@ const handleSubmit = async (e) => {
         <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Home Mobile Number </label>
     </div>
   </div>
+ 
   <div className="relative z-0 w-full mb-5 group bg-rose-200 text-black rounded-lg">
         <textarea type="text" name="reason" onChange={handleChange} id="floating_first_name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
         <label htmlFor="floating_first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Reason</label>

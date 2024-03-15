@@ -1,34 +1,88 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useEffect } from 'react'
 
-export default function LeaveCard() {
+export default function LeaveCard({name,email,rollNumber,from,to,reason,status,id,mobileNumber,noOfHolidays,hostelName}) {
+   const [date,setDate]=React.useState('')
+   const [lastDate,setLastDate]=React.useState('')
+
+   useEffect(()=>{
+    const dateOnly=from.split('T')[0]
+    const lastDateOnly=to.split('T')[0]
+    setDate(dateOnly)
+    setLastDate(lastDateOnly)
+   },[date,lastDate])
+   
+   
+    const handleApproved=async(id)=>{
+    try{
+        const res= await axios.put(`http://localhost:3000/api/holidaysApplication/updateStatus/${id}`,{status:"Approved"},{
+            headers: {
+                "Content-Type": "application/json",
+              },
+            }
+            )
+            console.log(res.data)
+    }catch(err){
+        console.log(err);
+    }
+   
+   }
+   const handleReject=async(id)=>{
+console.log(id)
+    try{
+        const res= await axios.put(`http://localhost:3000/api/holidaysApplication/updateStatus/${id}`,{status:"Rejected"},{
+            headers: {
+                "Content-Type": "application/json",
+              },
+            }
+            )
+            console.log(res.data)
+    }catch(err){
+        console.log(err);
+    }
+
+   }
   return (
-    <div>
-      <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex justify-end px-4 pt-4">
-        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-            <ul class="py-2" aria-labelledby="dropdownButton">
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-            </li>
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
-            </li>
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-            </li>
-            </ul>
+    <div >
+     
+
+<div className="flex border -ml-24 mt-4 mr-2">
+    <h1></h1>
+      {/* Left Box */}
+      <div className="w-1/8 p-4">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/en/8/83/Indian_Institute_of_Information_Technology%2C_Una_logo.png"
+          alt="Placeholder"
+          className="h-20 w-28"
+        />
+      </div>
+      {/* Right Box */}
+      <div className="w- p-4">
+        <div className='flex justify-between'>
+            <h1 className='flex'><h1 className='font-bold'>Name</h1> : {name} </h1>
+            <h1 className='ml-20 flex'><h1 className='font-bold'>Email</h1>  : {email}</h1>
+            <h1 className='ml-20 flex'><h1 className='font-bold'>Roll No</h1> : {rollNumber}</h1>
+            <h1 className='ml-10 flex'><h1 className='font-bold'>Mobile No</h1>: {mobileNumber}</h1>
         </div>
+        <div className='mt-4 flex justify-between'>
+<h1 className='flex'><h1 className='font-bold'> From</h1>: {date}</h1>
+<h1 className='flex ml-10'><h1 className='font-bold'> to</h1>: {lastDate}</h1>
+<h1 className='flex ml-10'><h1 className='font-bold'>No. of Days</h1>: {noOfHolidays}</h1>
+<h1 className='flex ml-10'><h1 className='font-bold'>Hostel:</h1>: {hostelName}</h1>
+
+        </div>
+        <p className="mt-4">
+         <h1 className='font-bold'>Reason:</h1> {reason}
+        </p>
+        <div className='flex justify-around mt-2'>
+        <button  onClick={()=>handleApproved(id)} className='border p-2 bg-green-500 hover:bg-green-600 text-white rounded-xl'>Approved</button>
+        <button onClick={()=>handleReject(id)} className='border p-2 bg-red-500 hover:bg-red-600 text-white rounded-xl'>Reject</button>
+
+        </div>
+      </div>
     </div>
-    <div class="flex flex-col items-center pb-10">
-        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
-        <div class="flex mt-4 md:mt-6">
-            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Accpted</a>
-            <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-red-700">Rejected</a>
-        </div>
-    </div>
-</div>
 
     </div>
   )

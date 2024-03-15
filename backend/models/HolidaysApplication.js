@@ -25,6 +25,7 @@ const holidayApplicationSchema = new mongoose.Schema({
           type: Date,
           required: true   
      },
+    
     reason: { type: String,
          required: true },
 
@@ -34,7 +35,8 @@ const holidayApplicationSchema = new mongoose.Schema({
     homeMobileNumber: { type: String,
          required: true },
 
-    userId: { type: mongoose.Types.ObjectId,
+    userId: {
+      type: mongoose.Types.ObjectId,
            required: true,
      },
           

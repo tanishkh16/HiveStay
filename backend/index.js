@@ -13,6 +13,8 @@ import post from "./routes/post.router.js"
 import getPosts from "./routes/post.router.js"
 import  holidaysApplicationStatus from "./routes/warden.router.js"
 import getHolidaysApplication from "./routes/warden.router.js"
+import holidayApplicationResponse from "./routes/user.router.js"
+import getmessComplaints from "./routes/warden.router.js"
  
  dotenv.config();
 
@@ -41,6 +43,8 @@ app.use("/api",post);
 app.use("/api",getPosts);
 app.use("/api",holidaysApplicationStatus)
 app.use("/api",getHolidaysApplication)
+app.use("/api",holidayApplicationResponse)
+app.use("/api",getmessComplaints)
 
 
 app.use(express.json()); // Parse JSON requests
