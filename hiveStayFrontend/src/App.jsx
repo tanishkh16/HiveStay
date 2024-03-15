@@ -15,6 +15,7 @@ import Notification from './Components/Pages/Notification/Notification'
 import Leave from './Components/Pages/Leave/Leave'
 import Profile from './Components/Login/Profile'
 import LeaveDescription from './Components/Pages/Leave/LeaveDescription'
+import { Toaster } from 'react-hot-toast'
 
 
 
@@ -39,6 +40,7 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path="/:id" element={<LeaveDescription />} />
         </Routes>
+        <Toaster/>
         </BrowserRouter>
 
     </>
